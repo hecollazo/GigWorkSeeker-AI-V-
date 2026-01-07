@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GigWorkSeeker - The blockchain-powered gig marketplace on Solana. Connect with verified service providers and customers securely.">
+    <meta name="keywords" content="gig economy, freelance, Solana, blockchain, verified workers, service providers">
+    <meta name="author" content="GigWorkSeeker">
+    <title>GigWorkSeeker | Blockchain-Powered Gig Marketplace on Solana</title>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="GigWorkSeeker - Verified Gig Marketplace">
+    <meta property="og:description" content="Connect with verified service providers on the blockchain. Secure payments, zero-knowledge identity verification.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gigworkseeker.io">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #9945FF;
+            --primary-dark: #7B2FE0;
+            --secondary: #14F195;
+            --dark: #0D1117;
+            --darker: #080B0F;
+            --card: #161B22;
+            --card-hover: #1F2937;
+            --border: #30363D;
+            --text: #E6EDF3;
+            --text-muted: #8B949E;
+            --success: #14F195;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --gradient: linear-gradient(135deg, #9945FF 0%, #14F195 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            border: none;
+            font-size: 0.95rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(153, 69, 255, 0.4);
+        }
+        
+        .btn-wallet {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-wallet:hover {
+            border-color: var(--secondary);
+            background: var(--card-hover);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            background: radial-gradient(ellipse at top, rgba(153, 69, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(20, 241, 149, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-content h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 540px;
+        }
+        
+        .hero-search {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            max-width: 560px;
+        }
+        
+        .hero-search input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 1rem;
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .hero-search input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .hero-search button {
+            padding: 1rem 2rem;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .stat h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .hero-visual {
+            position: relative;
+        }
+        
+        .hero-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+        }
+        
+        .gig-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .gig-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+        
+        .gig-badge {
+            background: rgba(20, 241, 149, 0.1);
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .gig-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .gig-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .gig-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .provider-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .provider-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .provider-details h4 {
+            font-weight: 600;
+        }
+        
+        .provider-details p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        .verified-badge {
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.85rem;
+        }
+        
+        /* Categories Section */
+        .categories {
+            padding: 6rem 2rem;
+            background: var(--darker);
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .categories-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .category-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 8px 30px rgba(153, 69, 255, 0.2);
+        }
+        
+        .category-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            background: rgba(153, 69, 255, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .category-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 2rem;
+        }
+        
+        .steps-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .step h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .step p {
+            color: var(--text-muted);
+        }
+        
+        /* Featured Gigs */
+        .featured-gigs {
+            padding: 6rem 2rem;
+            background: var(--darker);
+        }
+        
+        .gigs-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .gig-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .gig-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gig-card-image {
+            height: 160px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .gig-card-content {
+            padding: 1.5rem;
+        }
+        
+        .gig-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .gig-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .gig-card-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .gig-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .gig-card-provider {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .gig-card-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gradient);
+        }
+        
+        .gig-card-price {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        /* Token Section */
+        .token-section {
+            padding: 6rem 2rem;
+            background: radial-gradient(ellipse at center, rgba(153, 69, 255, 0.1) 0%, transparent 70%);
+        }
+        
+        .token-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .token-info h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .token-info h2 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .token-info p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .token-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .token-stat {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .token-stat h4 {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .token-stat p {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .token-visual {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .token-logo {
+            width: 280px;
+            height: 280px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 0 100px rgba(153, 69, 255, 0.5);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Verification Section */
+        .verification {
+            padding: 6rem 2rem;
+            background: var(--darker);
+        }
+        
+        .verification-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .verification-step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .verification-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 1rem;
+            background: rgba(20, 241, 149, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .verification-step h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .verification-step p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 2rem;
+            text-align: center;
+            background: radial-gradient(ellipse at bottom, rgba(153, 69, 255, 0.2) 0%, transparent 70%);
+        }
+        
+        .cta-section h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--darker);
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 4rem;
+        }
+        
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        
+        .social-links a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .footer-links h4 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text);
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Modals */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 440px;
+            width: 100%;
+            margin: 1rem;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        
+        .wallet-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .wallet-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .wallet-option:hover {
+            border-color: var(--primary);
+            background: rgba(153, 69, 255, 0.1);
+        }
+        
+        .wallet-option img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+        
+        .wallet-option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .wallet-option span {
+            font-weight: 500;
+        }
+        
+        /* Signup Modal */
+        .signup-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .signup-type {
+            padding: 2rem 1rem;
+            background: var(--darker);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .signup-type:hover, .signup-type.selected {
+            border-color: var(--primary);
+            background: rgba(153, 69, 255, 0.1);
+        }
+        
+        .signup-type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .signup-type h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .signup-type p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--darker);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-note {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-search {
+                margin: 0 auto;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .hero-visual {
+                display: none;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gigs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .token-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .verification-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gigs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .verification-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="16" fill="url(#grad1)"/>
+                    <path d="M10 16L14 20L22 12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="grad1" x1="0" y1="0" x2="32" y2="32">
+                            <stop offset="0%" stop-color="#9945FF"/>
+                            <stop offset="100%" stop-color="#14F195"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                GigWorkSeeker
+            </a>
+            <div class="nav-links">
+                <a href="#categories">Categories</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#gigs">Find Gigs</a>
+                <a href="#token">GIG Token</a>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-wallet" onclick="openWalletModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+                        <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+                        <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/>
+                    </svg>
+                    Connect Wallet
+                </button>
+                <button class="btn btn-primary" onclick="openSignupModal()">Get Started</button>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Find Verified <span>Gig Workers</span> on Solana</h1>
+                <p>The blockchain-powered marketplace connecting verified customers with trusted service providers. Secure payments, zero-knowledge identity verification, and complete transparency.</p>
+                <div class="hero-search">
+                    <input type="text" placeholder="Search for services (e.g., plumber, designer, developer...)">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>100%</h3>
+                        <p>Verified Users</p>
+                    </div>
+                    <div class="stat">
+                        <h3>$0</h3>
+                        <p>Platform Liability</p>
+                    </div>
+                    <div class="stat">
+                        <h3>ZK</h3>
+                        <p>Privacy-First</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="gig-preview">
+                        <div class="gig-header">
+                            <span class="gig-badge">✓ Verified</span>
+                            <span class="gig-price">0.5 SOL</span>
+                        </div>
+                        <h3 class="gig-title">Professional Home Plumbing Repair</h3>
+                        <div class="gig-meta">
+                            <span>📍 Denver, CO</span>
+                            <span>⭐ 4.9 (127 reviews)</span>
+                        </div>
+                        <div class="provider-info">
+                            <div class="provider-avatar">JD</div>
+                            <div class="provider-details">
+                                <h4>John Davis</h4>
+                                <p class="verified-badge">✓ ID Verified • Licensed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="section-header">
+            <h2>Browse Categories</h2>
+            <p>Find the right service provider for any task, from home repairs to professional services</p>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon">🔧</div>
+                <h3>Home Services</h3>
+                <p>2,450+ gigs</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">💻</div>
+                <h3>Tech & Development</h3>
+                <p>1,890+ gigs</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🎨</div>
+                <h3>Design & Creative</h3>
+                <p>1,650+ gigs</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">📝</div>
+                <h3>Writing & Content</h3>
+                <p>1,240+ gigs</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">📊</div>
+                <h3>Business & Finance</h3>
+                <p>980+ gigs</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🚗</div>
+                <h3>Auto & Transport</h3>
+                <p>870+ gigs</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">📸</div>
+                <h3>Photo & Video</h3>
+                <p>760+ gigs</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🎵</div>
+                <h3>Music & Audio</h3>
+                <p>540+ gigs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="section-header">
+            <h2>How GigWorkSeeker Works</h2>
+            <p>Get started in minutes with our simple, secure process</p>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Verify Your Identity</h3>
+                <p>Complete our privacy-first verification using zero-knowledge proofs. Your data stays yours.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Post or Find Gigs</h3>
+                <p>Customers post tasks, Service Providers browse and apply. AI matching helps find the perfect fit.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Complete & Get Paid</h3>
+                <p>Funds held in secure escrow. Upon completion, instant payment via Solana blockchain.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Gigs -->
+    <section id="gigs" class="featured-gigs">
+        <div class="section-header">
+            <h2>Featured Gigs</h2>
+            <p>Top-rated services from verified providers</p>
+        </div>
+        <div class="gigs-grid">
+            <div class="gig-card">
+                <div class="gig-card-image">🔧</div>
+                <div class="gig-card-content">
+                    <div class="gig-card-header">
+                        <span class="gig-badge">✓ Verified</span>
+                    </div>
+                    <h3>HVAC System Repair & Maintenance</h3>
+                    <div class="gig-card-meta">
+                        <span>📍 Austin, TX</span>
+                        <span>⭐ 4.9</span>
+                    </div>
+                    <div class="gig-card-footer">
+                        <div class="gig-card-provider">
+                            <div class="gig-card-avatar"></div>
+                            <span>Mike T.</span>
+                        </div>
+                        <span class="gig-card-price">0.8 SOL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gig-card">
+                <div class="gig-card-image">💻</div>
+                <div class="gig-card-content">
+                    <div class="gig-card-header">
+                        <span class="gig-badge">✓ Verified</span>
+                    </div>
+                    <h3>React/TypeScript Development</h3>
+                    <div class="gig-card-meta">
+                        <span>📍 Remote</span>
+                        <span>⭐ 5.0</span>
+                    </div>
+                    <div class="gig-card-footer">
+                        <div class="gig-card-provider">
+                            <div class="gig-card-avatar"></div>
+                            <span>Sarah K.</span>
+                        </div>
+                        <span class="gig-card-price">2.5 SOL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gig-card">
+                <div class="gig-card-image">🎨</div>
+                <div class="gig-card-content">
+                    <div class="gig-card-header">
+                        <span class="gig-badge">✓ Verified</span>
+                    </div>
+                    <h3>Brand Identity & Logo Design</h3>
+                    <div class="gig-card-meta">
+                        <span>📍 Los Angeles</span>
+                        <span>⭐ 4.8</span>
+                    </div>
+                    <div class="gig-card-footer">
+                        <div class="gig-card-provider">
+                            <div class="gig-card-avatar"></div>
+                            <span>Alex M.</span>
+                        </div>
+                        <span class="gig-card-price">1.2 SOL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Token Section -->
+    <section id="token" class="token-section">
+        <div class="token-container">
+            <div class="token-info">
+                <h2>Powered by <span>GIG Token</span></h2>
+                <p>The native token of GigWorkSeeker enables seamless payments, platform governance, and rewards for active participants in our ecosystem.</p>
+                <div class="token-stats">
+                    <div class="token-stat">
+                        <h4>Total Supply</h4>
+                        <p>10 Billion GIG</p>
+                    </div>
+                    <div class="token-stat">
+                        <h4>Network</h4>
+                        <p>Solana SPL</p>
+                    </div>
+                    <div class="token-stat">
+                        <h4>Transaction Fee</h4>
+                        <p>Near Zero</p>
+                    </div>
+                    <div class="token-stat">
+                        <h4>Settlement</h4>
+                        <p>~400ms</p>
+                    </div>
+                </div>
+            </div>
+            <div class="token-visual">
+                <div class="token-logo">GIG</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verification Section -->
+    <section class="verification">
+        <div class="section-header">
+            <h2>Trust & Verification</h2>
+            <p>Every user on GigWorkSeeker is verified. No exceptions.</p>
+        </div>
+        <div class="verification-grid">
+            <div class="verification-step">
+                <div class="verification-icon">🪪</div>
+                <h4>Government ID</h4>
+                <p>Driver's license or passport verification</p>
+            </div>
+            <div class="verification-step">
+                <div class="verification-icon">📸</div>
+                <h4>Face Verification</h4>
+                <p>Random selfie checks when accepting gigs</p>
+            </div>
+            <div class="verification-step">
+                <div class="verification-icon">🔐</div>
+                <h4>Zero-Knowledge</h4>
+                <p>Your data stays private with ZK proofs</p>
+            </div>
+            <div class="verification-step">
+                <div class="verification-icon">⭐</div>
+                <h4>Reputation System</h4>
+                <p>5-star ratings with detailed reviews</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Get Started?</h2>
+        <p>Join thousands of verified users on the most trusted gig marketplace built on Solana.</p>
+        <div class="cta-buttons">
+            <button class="btn btn-primary btn-lg" onclick="openSignupModal()">Create Account</button>
+            <button class="btn btn-outline btn-lg" onclick="openWalletModal()">Connect Wallet</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>GigWorkSeeker</h3>
+                <p>The blockchain-powered gig marketplace connecting verified customers with trusted service providers.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="Discord">D</a>
+                    <a href="#" aria-label="Telegram">T</a>
+                    <a href="#" aria-label="GitHub">G</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#">Find Gigs</a></li>
+                    <li><a href="#">Post a Task</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">API Docs</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">GIG Token</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Licenses</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 GigWorkSeeker. All rights reserved.</p>
+            <p>Built on Solana ⚡</p>
+        </div>
+    </footer>
+
+    <!-- Wallet Modal -->
+    <div class="modal-overlay" id="walletModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Connect Wallet</h3>
+                <button class="modal-close" onclick="closeWalletModal()">×</button>
+            </div>
+            <div class="wallet-options">
+                <div class="wallet-option" onclick="connectWallet('phantom')">
+                    <div class="wallet-option-icon" style="background: #AB9FF2;">👻</div>
+                    <span>Phantom</span>
+                </div>
+                <div class="wallet-option" onclick="connectWallet('solflare')">
+                    <div class="wallet-option-icon" style="background: #FC8D4D;">🔆</div>
+                    <span>Solflare</span>
+                </div>
+                <div class="wallet-option" onclick="connectWallet('backpack')">
+                    <div class="wallet-option-icon" style="background: #E33E3F;">🎒</div>
+                    <span>Backpack</span>
+                </div>
+                <div class="wallet-option" onclick="connectWallet('coinbase')">
+                    <div class="wallet-option-icon" style="background: #0052FF;">C</div>
+                    <span>Coinbase Wallet</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal-overlay" id="signupModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Get Started</h3>
+                <button class="modal-close" onclick="closeSignupModal()">×</button>
+            </div>
+            <div class="signup-options">
+                <div class="signup-type" onclick="selectSignupType('customer')">
+                    <div class="signup-type-icon">📋</div>
+                    <h4>Customer</h4>
+                    <p>Post tasks & hire providers</p>
+                </div>
+                <div class="signup-type" onclick="selectSignupType('provider')">
+                    <div class="signup-type-icon">🛠️</div>
+                    <h4>Service Provider</h4>
+                    <p>Find work & get paid</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="Create a password">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Continue</button>
+            <p class="form-note">You'll complete identity verification in the next step</p>
+        </div>
+    </div>
+
+    <script>
+        // Wallet Modal
+        function openWalletModal() {
+            document.getElementById('walletModal').classList.add('active');
+        }
+        
+        function closeWalletModal() {
+            document.getElementById('walletModal').classList.remove('active');
+        }
+        
+        function connectWallet(wallet) {
+            console.log('Connecting to', wallet);
+            // Wallet connection logic would go here
+            alert(`Connecting to ${wallet}... (Demo mode)`);
+            closeWalletModal();
+        }
+        
+        // Signup Modal
+        function openSignupModal() {
+            document.getElementById('signupModal').classList.add('active');
+        }
+        
+        function closeSignupModal() {
+            document.getElementById('signupModal').classList.remove('active');
+        }
+        
+        function selectSignupType(type) {
+            document.querySelectorAll('.signup-type').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+        }
+        
+        // Close modals on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
